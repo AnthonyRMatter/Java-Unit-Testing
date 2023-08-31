@@ -1,79 +1,82 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculatorTest {
 
-    Calculator calculator = new Calculator();
+  Calculator calculator = new Calculator();
 
-    @Test
-    public void testAdd() {
-        int expected = 3;
+  @Test
+  public void testAdd() {
+    int expected = 3;
 
-        int actual = calculator.add(1, 2);
+    int actual = calculator.add(1, 2);
 
-        assertEquals(expected, actual);
-    }
+    assertEquals(expected, actual);
+  }
 
-    @Test
-    public void testSubtract() {
-        int expected = 3;
+  @Test
+  public void testSubtract() {
+    int expected = 3;
 
-        int actual = calculator.subtract(5, 2);
+    int actual = calculator.subtract(5, 2);
 
-        assertEquals(expected, actual);
-    }
+    assertEquals(expected, actual);
+  }
 
-    @Test
-    public void testMultiply() {
-        int expected = 6;
+  @Test
+  public void testMultiply() {
+    int expected = 6;
 
-        int actual = calculator.multiply(2, 3);
+    int actual = calculator.multiply(2, 3);
 
-        assertEquals(expected, actual);
-    }
+    assertEquals(expected, actual);
+  }
 
-    @Test
-    public void testDivide() {
-        int expected = 2;
+  @Test
+  public void testDivide() {
+    int expected = 2;
 
-        int actual = calculator.divide(6, 3);
+    int actual = calculator.divide(6, 3);
 
-        assertEquals(expected, actual);
-    }
+    assertEquals(expected, actual);
+  }
 
-    @Test
-    public void testIsEven() {
-        boolean actual = calculator.isEven(2);
+  @ParameterizedTest
+  @ValueSource(ints = { 2, -2, -100000, 200000 })
+  public void testIsEven(int number) {
+    boolean actual = calculator.isEven(number);
 
-        assertTrue(actual);
-    }
+    assertTrue(actual);
+  }
 
-    @Test
-    public void testIsOdd() {
-        boolean actual = calculator.isEven(3);
+  @Test
+  public void testIsOdd() {
+    boolean actual = calculator.isEven(3);
 
-        assertFalse(actual);
-    }
+    assertFalse(actual);
+  }
 
-    @Test
-    public void testIncrementArray() {
-        int[] expected = new int[]{2, 3, 4};
+  @Test
+  public void testIncrementArray() {
+    int[] expected = new int[] { 2, 3, 4 };
 
-        int[] actual = calculator.incrementArray(new int[]{1, 2, 3});
+    int[] actual = calculator.incrementArray(new int[] { 1, 2, 3 });
 
-        assertArrayEquals(expected, actual);
-    }
+    assertArrayEquals(expected, actual);
+  }
 
-    @Test
-    public void testDivideByZero() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculator.divide(1, 0));
+  @Test
+  public void testDivideByZero() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> calculator.divide(1, 0));
 
-        String expected = "Ints cannot be divided by zero";
+    String expected = "Ints cannot be divided by zero";
 
-        String actual = exception.getMessage();
+    String actual = exception.getMessage();
 
-        assertEquals(expected, actual);
-    }
+    assertEquals(expected, actual);
+  }
 
 }
